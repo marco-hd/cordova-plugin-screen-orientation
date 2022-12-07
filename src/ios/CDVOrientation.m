@@ -44,10 +44,8 @@
     if(orientationMask & 4) {
         [result addObject:[NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft]];
     }
-    if(orientationMask & 8) {
-        if (!@available(iOS 16.0, *)) {
-             [result addObject:[NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight]];
-        }
+    if(orientationMask & 8) {        
+        [result addObject:[NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight]];        
     }
     
     SEL selector = NSSelectorFromString(@"setSupportedOrientations:");
@@ -114,9 +112,6 @@
                 if (@available(iOS 16.0, *)) {
                     #if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_15_5 // Xcode 14 and iOS 16, or greater
                         [self.viewController setNeedsUpdateOfSupportedInterfaceOrientations];
-                        if (orientationMask & 8) {
-                            [result addObject:[NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight]];                   
-                        }
                     #endif
                 } else {
                     [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
